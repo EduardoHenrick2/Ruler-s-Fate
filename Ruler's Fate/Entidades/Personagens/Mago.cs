@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
-namespace Ruler_s_Fate.Entidades
+namespace Ruler_s_Fate.Entidades.Personagens
 {
+    /// <summary>
+    /// Mago: pouca vida e força, mas alta Mana e Inteligência.
+    /// Especialidade: Bola de Fogo.
+    /// </summary>
     public class Mago : PersonagemBase
     {
-        // O Mago tem pouca vida e força, mas muita Mana e Inteligência
         public Mago(string nome)
             : base(nome, vida: 100, mana: 80, forca: 5, inteligencia: 25, velocidade: 12)
         {
         }
 
+        /// <summary>
+        /// Lança uma Bola de Fogo no alvo. Consome 20 de Mana e causa
+        /// dano igual a Inteligência * 2.
+        /// </summary>
         public void BolaDeFogo(PersonagemBase alvo)
         {
             if (Mana >= 20)

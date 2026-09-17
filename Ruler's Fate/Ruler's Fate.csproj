@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,5 +7,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <!-- Exclui a subpasta Testes/ para que o compilador não confunda
+       os arquivos xUnit com código do projeto principal. -->
+  <ItemGroup>
+    <Compile Remove="Testes\**" />
+    <EmbeddedResource Remove="Testes\**" />
+    <None Remove="Testes\**" />
+  </ItemGroup>
 
 </Project>

@@ -1,11 +1,12 @@
-﻿using Ruler_s_Fate.Sistemas;
+using Ruler_s_Fate.Entidades.Itens;
+using Ruler_s_Fate.Sistemas.Core;
+using Ruler_s_Fate.Sistemas.Racas;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ruler_s_Fate.Entidades
+namespace Ruler_s_Fate.Entidades.Personagens
 {
-
     public abstract class PersonagemBase
     {
         public string Nome { get; protected set; }
@@ -16,7 +17,8 @@ namespace Ruler_s_Fate.Entidades
         public int Forca { get; protected set; }
         public int Inteligencia { get; protected set; }
         public int Velocidade { get; protected set; }
-        public Raca RacaDoPersonagem { get; protected set; }
+        public Raca? RacaDoPersonagem { get; protected set; }
+        public Inventario Mochila { get; protected set; } = new Inventario();
 
         public PersonagemBase(string nome, int vida, int mana, int forca, int inteligencia, int velocidade)
         {
@@ -28,16 +30,35 @@ namespace Ruler_s_Fate.Entidades
             Inteligencia = inteligencia;
             Velocidade = velocidade;
         }
+
         public void ReceberDano(int dano)
         {
             VidaAtual -= dano;
 
-            if (VidaAtual < 0 )
+            if (VidaAtual < 0)
             {
                 VidaAtual = 0;
             }
             Console.WriteLine($"{Nome} recebeu {dano} de dano! Vida restante: {VidaAtual}/{VidaMax}");
         }
+
+        public void RestaurarVida(int quantidade)
+        {
+            VidaAtual += quantidade;
+            // Garante que a cura não ultrapasse o limite máximo de vida
+            if (VidaAtual > VidaMax)
+            {
+                VidaAtual = VidaMax;
+            }
+            Console.WriteLine($"{Nome} recuperou {quantidade} de Vida! ({VidaAtual}/{VidaMax})");
+        }
+
+        public void RestaurarMana(int quantidade)
+        {
+            Mana += quantidade;
+            Console.WriteLine($"{Nome} recuperou {quantidade} de Mana! (Mana total: {Mana})");
+        }
+
         public virtual void AtacarBasico(PersonagemBase alvo)
         {
             Console.WriteLine($"{Nome} realiza um ataque básico contra {alvo.Nome}!");
@@ -57,6 +78,5 @@ namespace Ruler_s_Fate.Entidades
 
             Console.WriteLine($"{Nome} tornou-se um {racaSorteada.Nome}! Seus atributos foram ajustados.");
         }
-
     }
 }

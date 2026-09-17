@@ -1,16 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ruler_s_Fate.Entidades
+namespace Ruler_s_Fate.Entidades.Personagens
 {
+    /// <summary>
+    /// Invocador: especialista em convocar aliados mágicos para lutar ao seu lado.
+    /// O limite de invocações simultâneas pode ser expandido via itens.
+    /// </summary>
     public class Invocador : PersonagemBase
     {
-        // A mecânica que você sugeriu: o limite base é 3.
-        // O "set" está público para que itens e armas dropadas possam aumentar esse limite depois.
+        // O limite base é 3. Público para que itens possam aumentar esse valor.
         public int LimiteInvocacoes { get; set; } = 3;
 
-        // A Lista que guarda quem está na arena lutando por você
+        /// <summary>Lista das criaturas atualmente na arena lutando pelo Invocador.</summary>
         public List<Aliado> CriaturasInvocadas { get; private set; } = new List<Aliado>();
 
         public Invocador(string nome)
@@ -18,20 +20,19 @@ namespace Ruler_s_Fate.Entidades
         {
         }
 
+        /// <summary>
+        /// Invoca um Golem de Pedra. Custa 30 de Mana e respeita o limite de invocações.
+        /// </summary>
         public void InvocarGolem()
         {
-            // Checa se você já não atingiu o limite máximo de invocações
+            // Checa se o limite máximo de invocações foi atingido
             if (CriaturasInvocadas.Count < LimiteInvocacoes)
             {
                 if (Mana >= 30)
                 {
                     Mana -= 30;
-                    // Cria a criatura usando a classe que fizemos acima
                     Aliado golem = new Aliado("Golem de Pedra", vida: 50, forca: 15, turnos: 3);
-
-                    // Adiciona o Golem na sua lista de aliados ativos
                     CriaturasInvocadas.Add(golem);
-
                     Console.WriteLine($"{Nome} bate o cajado no chão e invoca um {golem.Nome}! (Invocações ativas: {CriaturasInvocadas.Count}/{LimiteInvocacoes})");
                 }
                 else

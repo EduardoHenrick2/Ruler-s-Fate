@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
-namespace Ruler_s_Fate.Entidades
+namespace Ruler_s_Fate.Entidades.Personagens
 {
+    /// <summary>
+    /// Jackpot: personagem de alto risco/recompensa que depende da sorte para seus ataques.
+    /// Status equilibrados, mas o dano varia drasticamente com os dados.
+    /// </summary>
     public class Jackpot : PersonagemBase
     {
-        // Variável exclusiva desta classe para rolar os dados
-        private Random dadoSorte = new Random();
+        private readonly Random dadoSorte = new Random();
 
-        // O Jackpot tem status bem equilibrados/médios
         public Jackpot(string nome)
             : base(nome, vida: 120, mana: 50, forca: 15, inteligencia: 15, velocidade: 15)
         {
         }
 
+        /// <summary>
+        /// Rola um dado de 6 faces. 1 = Falha Crítica, 6 = JACKPOT (dano triplo),
+        /// qualquer outro = dano normal de Força.
+        /// </summary>
         public void DadoViciado(PersonagemBase alvo)
         {
             int rolagem = dadoSorte.Next(1, 7); // Rola de 1 a 6

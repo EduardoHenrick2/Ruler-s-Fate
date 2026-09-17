@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
-namespace Ruler_s_Fate.Entidades
+namespace Ruler_s_Fate.Entidades.Personagens
 {
-    // O Aliado também herda de PersonagemBase, pois tem vida e pode tomar dano
+    /// <summary>
+    /// Aliado invocado: tem vida e pode atacar, mas dura apenas
+    /// um número limitado de turnos antes de se dissipar.
+    /// </summary>
     public class Aliado : PersonagemBase
     {
         public int TurnosDeVida { get; private set; }
 
-        // O construtor recebe quantos turnos a criatura dura antes de sumir
+        /// <summary>
+        /// Cria um aliado invocado que dura <paramref name="turnos"/> turnos.
+        /// </summary>
         public Aliado(string nome, int vida, int forca, int turnos)
             : base(nome, vida, mana: 0, forca, inteligencia: 0, velocidade: 10)
         {
             TurnosDeVida = turnos;
         }
 
+        /// <summary>
+        /// Ataca o alvo e consome um turno de vida da invocação.
+        /// </summary>
         public void Atacar(PersonagemBase alvo)
         {
             Console.WriteLine($"{Nome} (Invocação) avança pesadamente contra {alvo.Nome}!");
