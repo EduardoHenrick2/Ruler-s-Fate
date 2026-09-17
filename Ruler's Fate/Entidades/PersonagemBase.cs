@@ -14,6 +14,7 @@ namespace Ruler_s_Fate.Entidades
         public int Forca { get; protected set; }
         public int Inteligencia { get; protected set; }
         public int Velocidade { get; protected set; }
+        public Raca RacaDoPersonagem { get; protected set; }
 
         public PersonagemBase(string nome, int vida, int mana, int forca, int inteligencia, int velocidade)
         {
