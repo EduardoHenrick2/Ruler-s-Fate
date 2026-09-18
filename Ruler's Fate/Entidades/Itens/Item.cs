@@ -19,6 +19,13 @@ namespace Ruler_s_Fate.Entidades.Itens
         }
 
         /// <summary>
+        /// Define se o item deve ser removido do inventário após ser usado.
+        /// Itens consumíveis (poções) retornam <c>true</c> (padrão).
+        /// Equipamentos retornam <c>false</c> — eles permanecem na mochila.
+        /// </summary>
+        public virtual bool RemoverAoUsar => true;
+
+        /// <summary>
         /// Usa o item no personagem alvo. Pode ser sobrescrito por itens especializados.
         /// </summary>
         public virtual void Usar(PersonagemBase alvo)

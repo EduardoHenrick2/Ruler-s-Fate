@@ -52,12 +52,16 @@ namespace Ruler_s_Fate.Sistemas.Core
 
             for (int i = 0; i < ItensGuardados.Count; i++)
             {
-                Console.WriteLine($"[{i}] {ItensGuardados[i].Nome} - {ItensGuardados[i].Descricao}");
+                Item item = ItensGuardados[i];
+                string tag = (item is Equipamento eq && eq.EstaEquipado) ? " [EQUIPADO]" : "";
+                Console.WriteLine($"[{i}] {item.Nome}{tag} - {item.Descricao}");
             }
         }
 
         /// <summary>
-        /// Usa e remove o item no índice especificado, aplicando seu efeito no <paramref name="alvo"/>.
+        /// Usa o item no índice especificado, aplicando seu efeito no <paramref name="alvo"/>.
+        /// Itens consumíveis (poções) são removidos após o uso.
+        /// Equipamentos permanecem no inventário — funcionam como um toggle equipa/desequipa.
         /// </summary>
         public void ConsumirItem(int indice, PersonagemBase alvo)
         {
@@ -65,7 +69,10 @@ namespace Ruler_s_Fate.Sistemas.Core
             {
                 Item itemEscolhido = ItensGuardados[indice];
                 itemEscolhido.Usar(alvo);
-                ItensGuardados.RemoveAt(indice);
+
+                // Só remove do inventário se o item pede para ser consumido
+                if (itemEscolhido.RemoverAoUsar)
+                    ItensGuardados.RemoveAt(indice);
             }
             else
             {
