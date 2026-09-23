@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🐉 Ruler's Fate
 
 **Ruler's Fate** é um jogo de RPG de turnos desenvolvido em C# (.NET 10) para o console. O projeto possui uma arquitetura fortemente orientada a objetos (POO), implementando mecânicas clássicas de RPG como classes, sistema de "gacha" para raças, progressão de níveis, status e um sistema completo de inventário e equipamentos.
@@ -64,3 +65,6 @@ O projeto conta com testes unitários para garantir a estabilidade do combate, i
 # Para rodar a suíte de testes xUnit:
 dotnet test "Ruler's Fate/Testes/RulersFate.Testes.csproj"
 ```
+=======
+RUlers
+>>>>>>> cc2adf8e0d6274f3dd895d9d5b0609f52163caa7
